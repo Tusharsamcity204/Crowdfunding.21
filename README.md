@@ -26,5 +26,7 @@ Our vision is to offer a fast, transparent, and gas-efficient fundraising tool p
 - 💼 Support for multiple campaigns from different users
 
 ---
+Contract details :0x27E28AF6af81C0a47bFA3eBCEfCbADc245f0C441
+<img width="938" alt="image" src="https://github.com/user-attachments/assets/1f9d3609-584b-4a5e-b5b6-3a6320554f09" />
 
 
