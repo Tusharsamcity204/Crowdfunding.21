@@ -33,5 +33,6 @@ contract Crowdfunding {
     function getBalance() external view returns (uint) {
         return address(this).balance;
     }
+// proper code i have made , kindly go through it !
 }
 
