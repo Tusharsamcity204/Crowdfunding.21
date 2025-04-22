@@ -1,6 +1,6 @@
 pragma solidity ^0.8.0;
 
-contract Crowdfunding {
+contract CharityDonation {
     address public owner;
     uint public goal;
     uint public deadline;
@@ -30,9 +30,24 @@ contract Crowdfunding {
         payable(owner).transfer(address(this).balance);
     }
 
+    // Refund function: allows users to withdraw funds if the goal was not reached.
+    function refund() external {
+        require(block.timestamp >= deadline, "Campaign still active");
+        require(totalRaised < goal, "Goal was reached, no refund");
+
+        uint contribution = contributions[msg.sender];
+        require(contribution > 0, "No contributions to refund");
+
+        contributions[msg.sender] = 0;  // Reset the contribution to prevent double withdrawal
+        payable(msg.sender).transfer(contribution);
+    }
+
+    // View function to check individual contribution
+    function getContribution() external view returns (uint) {
+        return contributions[msg.sender];
+    }
+
     function getBalance() external view returns (uint) {
         return address(this).balance;
     }
-// proper code i have made , kindly go through it !
 }
-
