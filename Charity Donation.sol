@@ -66,28 +66,57 @@ contract CharityDonation {
         return address(this).balance;
     }
 
-    // New Function: Extend the campaign deadline
     function extendDeadline(uint _extraDays) external onlyOwner {
         deadline += _extraDays * 1 days;
     }
 
-    // New Function: Get remaining time in seconds
     function getTimeLeft() external view returns (uint) {
         if (block.timestamp >= deadline) return 0;
         return deadline - block.timestamp;
     }
 
-    // New Function: Pause and Resume the campaign
     function togglePause() external onlyOwner {
         paused = !paused;
     }
 
-    // New Function: View all contributors and their contributions
     function getAllContributors() external view returns (address[] memory, uint[] memory) {
         uint[] memory amounts = new uint[](contributors.length);
         for (uint i = 0; i < contributors.length; i++) {
             amounts[i] = contributions[contributors[i]];
         }
         return (contributors, amounts);
+    }
+
+    // ✅ New Function: Change the goal amount (only before deadline and when paused)
+    function changeGoal(uint _newGoal) external onlyOwner {
+        require(paused, "Pause the campaign to change goal");
+        require(block.timestamp < deadline, "Campaign already ended");
+        goal = _newGoal;
+    }
+
+    // ✅ New Function: Check if goal is reached
+    function isGoalReached() external view returns (bool) {
+        return totalRaised >= goal;
+    }
+
+    // ✅ New Function: Return percentage raised (in basis points: 10000 = 100%)
+    function getPercentageRaised() external view returns (uint) {
+        if (goal == 0) return 0;
+        return (totalRaised * 10000) / goal;
+    }
+
+    // ✅ New Function: Owner can remove a contributor (for correction purposes)
+    function removeContributor(address _contributor) external onlyOwner {
+        require(contributions[_contributor] > 0, "No contributions from this address");
+        totalRaised -= contributions[_contributor];
+        contributions[_contributor] = 0;
+
+        for (uint i = 0; i < contributors.length; i++) {
+            if (contributors[i] == _contributor) {
+                contributors[i] = contributors[contributors.length - 1];
+                contributors.pop();
+                break;
+            }
+        }
     }
 }
