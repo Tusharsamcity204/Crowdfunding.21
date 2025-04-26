@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Charity Donation DApp</title>
+    <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input, button { margin: 8px 0; padding: 8px; width: 300px; }
+        #info { margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>🎯 Charity Donation Campaign</h1>
+
+    <button onclick="connectWallet()">Connect Wallet</button>
+
+    <h2>Contribute</h2>
+    <input type="number" id="amount" placeholder="Amount in ETH">
+    <button onclick="contribute()">Donate</button>
+
+    <h2>Admin Actions (Owner Only)</h2>
+    <input type="number" id="extraDays" placeholder="Extra days to extend">
+    <button onclick="extendDeadline()">Extend Deadline</button>
+
+    <input type="number" id="newGoal" placeholder="New Goal Amount">
+    <button onclick="changeGoal()">Change Goal</button>
+
+    <input type="text" id="removeAddress" placeholder="Contributor Address to Remove">
+    <button onclick="removeContributor()">Remove Contributor</button>
+
+    <button onclick="withdraw()">Withdraw Funds</button>
+    <button onclick="togglePause()">Toggle Pause</button>
+
+    <h2>Information</h2>
+    <button onclick="getDetails()">Get Campaign Details</button>
+    <div id="info"></div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
