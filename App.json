@@ -1,0 +1,114 @@
+{
+  "contractName": "CharityDonation",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Your Name",
+  "description": "A decentralized charity donation campaign contract with goal tracking, deadline handling, refunds, pause/resume control, and contributor management.",
+  "functions": [
+    {
+      "name": "contribute",
+      "type": "payable",
+      "visibility": "external",
+      "modifiers": ["whenNotPaused"]
+    },
+    {
+      "name": "withdraw",
+      "type": "nonpayable",
+      "visibility": "external",
+      "modifiers": ["onlyOwner"]
+    },
+    {
+      "name": "refund",
+      "type": "nonpayable",
+      "visibility": "external"
+    },
+    {
+      "name": "getContribution",
+      "type": "view",
+      "returns": ["uint"]
+    },
+    {
+      "name": "getBalance",
+      "type": "view",
+      "returns": ["uint"]
+    },
+    {
+      "name": "extendDeadline",
+      "type": "nonpayable",
+      "inputs": ["uint _extraDays"],
+      "modifiers": ["onlyOwner"]
+    },
+    {
+      "name": "getTimeLeft",
+      "type": "view",
+      "returns": ["uint"]
+    },
+    {
+      "name": "togglePause",
+      "type": "nonpayable",
+      "modifiers": ["onlyOwner"]
+    },
+    {
+      "name": "getAllContributors",
+      "type": "view",
+      "returns": ["address[]", "uint[]"]
+    },
+    {
+      "name": "changeGoal",
+      "type": "nonpayable",
+      "inputs": ["uint _newGoal"],
+      "modifiers": ["onlyOwner"]
+    },
+    {
+      "name": "isGoalReached",
+      "type": "view",
+      "returns": ["bool"]
+    },
+    {
+      "name": "getPercentageRaised",
+      "type": "view",
+      "returns": ["uint"]
+    },
+    {
+      "name": "removeContributor",
+      "type": "nonpayable",
+      "inputs": ["address _contributor"],
+      "modifiers": ["onlyOwner"]
+    }
+  ],
+  "stateVariables": {
+    "owner": {
+      "type": "address",
+      "visibility": "public"
+    },
+    "goal": {
+      "type": "uint",
+      "visibility": "public"
+    },
+    "deadline": {
+      "type": "uint",
+      "visibility": "public"
+    },
+    "totalRaised": {
+      "type": "uint",
+      "visibility": "public"
+    },
+    "paused": {
+      "type": "bool",
+      "visibility": "public"
+    },
+    "contributions": {
+      "type": "mapping(address => uint)",
+      "visibility": "public"
+    },
+    "contributors": {
+      "type": "address[]",
+      "visibility": "public"
+    }
+  },
+  "constructor": {
+    "inputs": ["uint _goal", "uint _durationInDays"],
+    "visibility": "public"
+  },
+  "modifiers": ["onlyOwner", "whenNotPaused"]
+}
