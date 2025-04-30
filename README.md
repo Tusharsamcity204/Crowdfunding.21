@@ -17,6 +17,28 @@ Our vision is to offer a fast, transparent, and gas-efficient fundraising tool p
 - 📊 Tracks total funds raised and individual contributions
 - ⏱ Minimal gas cost, simple and efficient design
 
+🛠 Tech Stack
+Solidity – Smart contract language
+
+Hardhat – Development environment for testing and deploying smart contracts
+
+Ether.js – To interact with the Ethereum blockchain
+
+Metamask – Wallet integration for contributing ETH
+
+(Optional) React.js – For building the frontend DApp (in future scope)
+
+✅ Prerequisites
+Before running or deploying the project, ensure the following:
+
+Node.js and npm installed
+
+Hardhat configured in the project
+
+Test Ethereum network (like Goerli or Hardhat local)
+
+Metamask browser extension
+
 ## 🔭 Future Scope
 
 - ⛔ Refund mechanism if the goal is not reached
